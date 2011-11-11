@@ -9,6 +9,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
+import org.apache.maven.plugin.logging.Log;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -16,7 +17,13 @@ import org.jsoup.nodes.Document;
 public class Indexer {
 
 	private String startDir;
+	private Log log;
 	
+	public Indexer(Log log) {
+		this.log = log;
+	}
+
+
 	private String relativeToStart(String filename) {
 		return filename.replaceAll("\\\\", "\\/").substring(startDir.length());
 	}
@@ -76,48 +83,12 @@ public class Indexer {
 	        reader.close();
 	        
 	        
-	        if (oldText.indexOf(signature) > 0)
-	        	return;
+	        if (oldText.indexOf(signature) > 0) {
+	        	log.info("tags already added to '" + filename + "', quitting");
+	        	return;	        	
+	        }
 	        
-/*
-
-<link href=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css\" rel=\"stylesheet\" type=\"text/css\"/>
-<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js\"></script>
-<script src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js\"></script>
-
-
-<script>
-$(document).ready(function() {
-  $(\"#dialog\").dialog({ position: ['right','top'], width: 200, height: 130 });
-});
-</script>
-
-</head>
-
-<body>
-
-<div id=\"dialog\" title=\"Search\">
-  <iframe src=\"searchbox.html\" width=\"100%\" style=\"border: 0\" height=\"100%\">
-  </iframe>
-</div>
-	          
-*/
-
-	        
-//	        String newText = oldText.replaceAll("</head>", 
-//	        		"<script language=\"JavaScript\" src=\"js/search.js\"></script>" + 
-//	        		"<script language=\"JavaScript\" src=\"js/index.js\"></script>" + 
-//	        		"<link href=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css\" rel=\"stylesheet\" type=\"text/css\"/>" + 
-//	        		"<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js\"></script>" + 
-//	        		"<script src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js\"></script>" + 
-//	        		"<script>" + 
-//	        		"$(document).ready(function() {" + 
-//	        		"  $(\"#dialog\").dialog({ position: ['right','top'], width: 200, height: 130 });" + 
-//	        		"});" + 
-//	        		"</script>" + 
-//	        		"</head>"
-//	        );
-
+        	log.info("applying tags to '" + filename + "'...");
 	        String newText = oldText.replaceAll("</body>", 
 	    		"<div style=\"display: none\" id=\"dialog\" title=\"Search\">" +
 	    		"  <iframe src=\"searchbox.html\" width=\"100%\" style=\"border: 0\" height=\"100%\">" +
@@ -127,24 +98,18 @@ $(document).ready(function() {
 	    		"</body>"
 	        );
 
-	        //	        newText = newText.replaceAll("</body>", 
-//	        		"<div id=\"dialog\" title=\"Search\">" +
-//	        		"  <iframe src=\"searchbox.html\" width=\"100%\" style=\"border: 0\" height=\"100%\">" +
-//	        		"  </iframe>" +
-//	        		"</div>" +
-//	        		signature +
-//	        		"</body>"
-//	        );
-//		       
-	        FileWriter writer = new FileWriter(file);
+
+        	FileWriter writer = new FileWriter(file);
 	        writer.write(newText);
 	        writer.close();
+        	log.info("done");
 	    } catch (IOException ioe) {
-	        ioe.printStackTrace();
+        	log.error(ioe);
 	    }
 	}
 
 	private void parseDocument(String filename, FileOutputStream out) throws IOException {
+    	log.info("indexing '" + filename + "'...");
 		out.write("var d = new LADDERS.search.document();\r\n".getBytes());
 		out.write(("d.add(\"id\", '" + relativeToStart(filename) + "');\r\n").getBytes());
 		out.write("d.add(\"text\", \"".getBytes());
@@ -157,12 +122,14 @@ $(document).ready(function() {
 			out.write(("d.add(\"title\", '" + doc.title() + "');\r\n").getBytes());
 			out.write(("titles.add(\"" + relativeToStart(filename) + "\", \"" + doc.title() + "\");\r\n").getBytes()); 
 		} catch (IOException e) {
-			e.printStackTrace();
+        	log.error(e);
 		}
 		out.write("index.addDocument(d);\r\n\r\n".getBytes());
+    	log.info("done");
 	}
 	
 	private void crawlFolder(String dirName, FileOutputStream out) throws IOException {
+    	log.info("crawling '" + dirName + "'...");
 		File dir = new File(dirName);
 		FilenameFilter filter = new FilenameFilter() {
 			@Override
@@ -201,6 +168,7 @@ $(document).ready(function() {
 		        crawlFolder(subDirName, out);
 		    }
 		}
+    	log.info("done with folder '" + dirName + "'");
 	}
 
 	public void buildIndex(String startDir, String outputFile) throws IOException {
