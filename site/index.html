@@ -112,10 +112,10 @@
             <ul>
                 <li>putting searchbox.html in site/resources</li>
                 <li>putting search.js in site/js</li>
-                <li>mvn site:site index:index</li>
-                <li>mvn site-deploy</li>
-                <li>open up your deployed site and enjoy your nice and free search box ;)</li>
+                <li>mvn site:site index:index (don't site-deploy it, as it overvwrites the added tags - still working on this :P)</li>
+                <li>open up your site and enjoy your nice and free search box!</li>
             </ul>
+            <p>Wanna see an example? Look at the top right corner of this page ;)</p>
         </div>
     
 
@@ -134,5 +134,5 @@
         <hr/>
       </div>
     </div>
-  <div style="display: none" id="dialog" title="Search">  <iframe src="searchbox.html" width="100%" style="border: 0" height="100%">  </iframe></div><!-- Decorated by Maven Site Indexer --></body>
+  <div id="dialog" title="Search">  <iframe src="searchbox.html" width="100%" style="border: 0" height="100%">  </iframe></div><!-- Decorated by Maven Site Indexer --></body>
 </html>

@@ -90,7 +90,7 @@ public class Indexer {
         	log.info("applying tags to '" + filename + "'...");
 
 	        String newText = oldText.replaceAll("</body>", 
-	    		"<div style=\"display: none\" id=\"dialog\" title=\"Search\">" +
+	    		"<div id=\"dialog\" title=\"Search\">" +
 	    		"  <iframe src=\"searchbox.html\" width=\"100%\" style=\"border: 0\" height=\"100%\">" +
 	    		"  </iframe>" +
 	    		"</div>" +
