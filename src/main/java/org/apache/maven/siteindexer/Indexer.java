@@ -102,7 +102,7 @@ public class Indexer {
         	FileWriter writer = new FileWriter(file);
 	        writer.write(newText);
 	        writer.close();
-        	log.info("done");
+        	log.info("applied tags to '" + filename + "'");
 	    } catch (IOException ioe) {
         	log.error(ioe);
 	    }
@@ -125,7 +125,7 @@ public class Indexer {
         	log.error(e);
 		}
 		out.write("index.addDocument(d);\r\n\r\n".getBytes());
-    	log.info("done");
+    	log.info("done indexing '" + filename + "'");
 	}
 	
 	private void crawlFolder(String dirName, FileOutputStream out) throws IOException {
