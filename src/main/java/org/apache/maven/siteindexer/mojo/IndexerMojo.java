@@ -18,7 +18,7 @@ public class IndexerMojo extends AbstractMojo {
 	
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
-		Indexer indexer = new Indexer();
+		Indexer indexer = new Indexer(getLog());
 		try {
 			getLog().info("Maven Site Index");
 			getLog().info("------------------------------");
