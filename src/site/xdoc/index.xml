@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <author>Raffaele Guidi</author>
+        <title>Maven Site Indexer Plugin</title>
+    </properties>
+    <meta name="keyword" content="maven java site index indexer"/>
+    <body>
+        <section name="Idea and Concept">
+            <p>
+               An easy way to realize indexing in existing or new Java based software projects.
+               This indexing solution reduces the complexity of software indexing to a minimum.
+            </p>
+            <p>The plugin configuration provides the following opportunities:</p>
+            <ul>
+                <li>definition of methods and classes, that should be tracked</li>
+                <li>choose if monitoring data will be saved local or at a central monitoring database</li>
+                <li>clear monitoring data</li>
+                <li>additional meta information about developer and department</li>
+            </ul>
+        </section>
+    </body>
+</document>
