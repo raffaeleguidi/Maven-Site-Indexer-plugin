@@ -9,14 +9,14 @@ index.addDocument(d);
 
 var d = new LADDERS.search.document();
 d.add("id", 'distribution-management.html');
-d.add("text", "Project Distribution Management Last Published 2011 11 11   Version 0 0 1 SNAPSHOT Menu Overview Project Documentation Project Information Distribution Management About Dependencies Issue Tracking Project Plugins Continuous Integration Project License Mailing Lists Project Team Source Repository Plugin Management Project Summary Overview No distribution management is defined for this project Copyright 2011 All Rights Reserved ");
+d.add("text", "Project Distribution Management Last Published 2011 11 11   Version 0 0 1 SNAPSHOT Menu Overview Project Documentation Project Information Distribution Management About Dependencies Issue Tracking Project Plugins Continuous Integration Project License Mailing Lists Project Team Source Repository Plugin Management Project Summary Overview The following is the distribution management information used by this project Site gh pages file C Development MavenSiteIndexerPlugin site Copyright 2011 All Rights Reserved ");
 d.add("title", 'Project Distribution Management');
 titles.add("distribution-management.html", "Project Distribution Management");
 index.addDocument(d);
 
 var d = new LADDERS.search.document();
 d.add("id", 'index.html');
-d.add("text", "Maven Site Indexer Plugin Last Published 2011 11 10   Version 0 0 1 SNAPSHOT Menu Overview Project Documentation Project Information Distribution Management About Dependencies Issue Tracking Project Plugins Continuous Integration Project License Mailing Lists Project Team Source Repository Plugin Management Project Summary Idea and Concept An easy way to realize indexing in existing or new Java based software projects This indexing solution reduces the complexity of software indexing to a minimum The plugin configuration provides the following opportunities definition of methods and classes that should be tracked choose if monitoring data will be saved local or at a central monitoring database clear monitoring data additional meta information about developer and department Copyright 2011 All Rights Reserved ");
+d.add("text", "Maven Site Indexer Plugin Last Published 2011 11 11   Version 0 0 1 SNAPSHOT Menu Overview Project Documentation Project Information Distribution Management About Dependencies Issue Tracking Project Plugins Continuous Integration Project License Mailing Lists Project Team Source Repository Plugin Management Project Summary Maven Site Indexer plugin An easy way to index your maven site and give it a nice ajax search box It s easy as putting searchbox html in site resources putting search js in site js mvn site site index index mvn site deploy open up your deployed site and enjoy your nice and free search box Copyright 2011 All Rights Reserved ");
 d.add("title", 'Maven Site Indexer Plugin');
 titles.add("index.html", "Maven Site Indexer Plugin");
 index.addDocument(d);

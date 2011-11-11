@@ -6,17 +6,17 @@
     </properties>
     <meta name="keyword" content="maven java site index indexer"/>
     <body>
-        <section name="Idea and Concept">
+        <section name="Maven Site Indexer plugin">
             <p>
-               An easy way to realize indexing in existing or new Java based software projects.
-               This indexing solution reduces the complexity of software indexing to a minimum.
+               An easy way to index your maven site and give it a nice ajax search box.
             </p>
-            <p>The plugin configuration provides the following opportunities:</p>
+            <p>It's easy as:</p>
             <ul>
-                <li>definition of methods and classes, that should be tracked</li>
-                <li>choose if monitoring data will be saved local or at a central monitoring database</li>
-                <li>clear monitoring data</li>
-                <li>additional meta information about developer and department</li>
+                <li>putting searchbox.html in site/resources</li>
+                <li>putting search.js in site/js</li>
+                <li>mvn site:site index:index</li>
+                <li>mvn site-deploy</li>
+                <li>open up your deployed site and enjoy your nice and free search box ;)</li>
             </ul>
         </section>
     </body>
