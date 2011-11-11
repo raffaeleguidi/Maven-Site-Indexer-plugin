@@ -7,12 +7,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
     <script>
       $(document).ready(function() {
-        //alert($("#dialog", window.parent.document).attr('id'));
-        // position:fixed;top:20px;left:0;
         $("#dialog", window.parent.document).css('position', 'fixed');
         $("#dialog", window.parent.document).css('top', '10px');
         $("#dialog", window.parent.document).css('left', $(window).width()- 325);
-        $("#dialog", window.parent.document).css('height', '100%');
       });
       
       function print(what) {
@@ -31,7 +28,7 @@
     		div.innerHTML = '';
     		var q = document.getElementById('q');
     		q.value = '';
-        $("#searchOutput").css('padding', '0px');
+        	$("#searchOutput").css('padding', '0px');
     	}
 
     	function go(q) {
