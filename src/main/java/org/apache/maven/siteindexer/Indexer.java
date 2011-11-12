@@ -69,7 +69,7 @@ public class Indexer {
 		}
 	}
 	
-	private final String signature = "<!-- Decorated by Maven Site Indexer -->";
+	private final String signature = "<!-- Search box courtesy of Maven Site Indexer -->";
 	
 	private void addTags(String filename) {
         try {
@@ -82,7 +82,7 @@ public class Indexer {
 	        }
 	        reader.close();
 	        
-	        if (oldText.indexOf(signature) > 0) {
+	        if (oldText.indexOf("id=\"searchbox\"") > 0) {
 	        	log.info("tags already added to '" + filename + "', quitting");
 	        	return;	        	
 	        }
@@ -90,8 +90,8 @@ public class Indexer {
         	log.info("applying tags to '" + filename + "'...");
 
 	        String newText = oldText.replaceAll("</body>", 
-	    		"<div id=\"dialog\" title=\"Search\">" +
-	    		"  <iframe src=\"searchbox.html\" width=\"100%\" style=\"border: 0\" height=\"100%\">" +
+	    		"<div id=\"searchbox\">" +
+	    		"  <iframe id=\"searchbox-frame\" src=\"searchbox.html\" width=\"100%\" style=\"border: 0\" height=\"100%\">" +
 	    		"  </iframe>" +
 	    		"</div>" +
 	    		signature +
@@ -109,7 +109,7 @@ public class Indexer {
 	}
 
 	private void parseDocument(String filename, FileOutputStream out) throws IOException {
-    	log.info("indexing '" + filename + "'...");
+    	log.info("indexing '" + relativeToStart(filename) + "'...");
 		out.write("var d = new LADDERS.search.document();\r\n".getBytes());
 		out.write(("d.add(\"id\", '" + relativeToStart(filename) + "');\r\n").getBytes());
 		out.write("d.add(\"text\", \"".getBytes());
@@ -125,11 +125,11 @@ public class Indexer {
         	log.error(e);
 		}
 		out.write("index.addDocument(d);\r\n\r\n".getBytes());
-    	log.info("done indexing '" + filename + "'");
+    	log.info("done indexing '" + relativeToStart(filename) + "'");
 	}
 	
 	private void crawlFolder(String dirName, FileOutputStream out) throws IOException {
-    	log.info("crawling '" + dirName + "'...");
+    	log.info("crawling folder '" + dirName + "'...");
 		File dir = new File(dirName);
 		FilenameFilter filter = new FilenameFilter() {
 			@Override
@@ -147,8 +147,10 @@ public class Indexer {
 		    for (int i=0; i< files.length; i++) {
 		        // Get filename of file or directory
 		        String filename = files[i];
-		        parseDocument(dir.getAbsolutePath() + "/" + filename, out);
-		        addTags(filename);
+		        if (!"searchbox.html".equals(filename)) {
+			        parseDocument(dir.getAbsolutePath() + "/" + filename, out);
+			        addTags(filename);
+		        }
 		    }
 		}
 		FilenameFilter dirFilter = new FilenameFilter() {
@@ -178,6 +180,7 @@ public class Indexer {
 		//http://dev.theladders.com/archives/2006/11/introducing_javascript_fulltex_1.html
 		out.write("var index = new LADDERS.search.index();\r\n".getBytes());
 		out.write("var titles = new LADDERS.search.document();\r\n".getBytes());
+		log.info("index.js initialized");
 		this.startDir = new File(startDir).getAbsolutePath() + "/";
 		crawlFolder(startDir, out);
 	}

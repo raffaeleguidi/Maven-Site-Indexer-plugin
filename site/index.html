@@ -48,6 +48,9 @@
                   <li class="none">
             <strong>Overview</strong>
           </li>
+                  <li class="none">
+                          <a href="usage.html" title="Usage instructions">Usage instructions</a>
+            </li>
           </ul>
                        <h5>Project Documentation</h5>
                   <ul>
@@ -110,12 +113,20 @@
             </p>
             <p>It's <b>as easy as</b>:</p>
             <ul>
-                <li>putting searchbox.html in site/resources (you can customize it if you have a good javascript-fu)</li>
-                <li>putting search.js in site/js (just put it as it is)</li>
-                <li>mvn site:site index:index (don't site-deploy it, as this overwrites the added tags - still working on this :P)</li>
-                <li>open up your site and enjoy your nice and free search box!</li>
+                <li>adding the plugin to your pom.xml (see <a href="usage.html">usage instructions</a> - of course it should already have the site plugin configured)</li>
+                <li>putting searchbox.html in src/site/resources (you can customize it if you have a good javascript-fu)
+<div class="source"><pre>//in example you can change the positioning
+$(&quot;#searchbox&quot;, window.parent.document).css('top', '10px');
+$(&quot;#searchbox&quot;, window.parent.document).css('left', $(window).width()- 325);
+...
+&lt;!-- or change the color of the search results box --&gt;
+&lt;div style=&quot;background-color: lightyellow&quot; id=&quot;searchOutput&quot;/&gt;</pre></div>
+			 	</li>
+                <li>putting search.js in src/site/resources/js (just put it as it is)</li>
+                <li>calling mvn site</li>
+                <li>opening up your site and enjoying your nice and hassle-free search box!</li>
             </ul>
-            <p>Wanna see an example? Look at the top right corner of this page ;) Wanna try it? It's apache licensed and <a class="externalLink" href="https://github.com/raffaeleguidi/Maven-Site-Indexer-plugin">you can find it on GitHub</a></p>
+            <p>Wanna see it in action? Look at the top right corner of this page ;) Wanna try it? It's apache licensed and <a class="externalLink" href="https://github.com/raffaeleguidi/Maven-Site-Indexer-plugin">you can find it on GitHub</a></p>
         </div>
     
 
@@ -134,5 +145,5 @@
         <hr/>
       </div>
     </div>
-  <div id="dialog" title="Search">  <iframe src="searchbox.html" width="100%" style="border: 0" height="100%">  </iframe></div><!-- Decorated by Maven Site Indexer --></body>
+  <div id="searchbox">  <iframe id="searchbox-frame" src="searchbox.html" width="100%" style="border: 0" height="100%">  </iframe></div><!-- Search box courtesy of Maven Site Indexer --></body>
 </html>

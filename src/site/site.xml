@@ -7,6 +7,7 @@
     <body>
         <menu name="Menu">
             <item name="Overview" href="index.html"/>
+            <item name="Usage instructions" href="usage.html"/>
         </menu>
         <menu ref="reports"/>
     </body>
