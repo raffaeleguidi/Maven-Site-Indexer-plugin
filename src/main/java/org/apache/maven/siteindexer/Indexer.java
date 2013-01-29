@@ -120,7 +120,9 @@ public class Indexer {
 		    tokenizeText(doc.text(), out);
 			out.write("\");\r\n".getBytes());
 			out.write(("d.add(\"title\", '" + doc.title() + "');\r\n").getBytes());
-			out.write(("titles.add(\"" + relativeToStart(filename) + "\", \"" + doc.title() + "\");\r\n").getBytes()); 
+			out.write(
+					("titles.add(\"" + relativeToStart(filename) + "\", \"" + doc.title() + "\");\r\n").getBytes()
+					); 
 		} catch (IOException e) {
         	log.error(e);
 		}
@@ -134,7 +136,7 @@ public class Indexer {
 		FilenameFilter filter = new FilenameFilter() {
 			@Override
 		    public boolean accept(File dir, String name) {
-				File child = new File(dir.getAbsolutePath() + "/" + name);
+				File child = new File(dir.getAbsolutePath() + File.separator + name);
 		        return child.isFile() && (child.getName().endsWith("htm") || child.getName().endsWith("html"));
 		    }
 		};
@@ -148,7 +150,7 @@ public class Indexer {
 		        // Get filename of file or directory
 		        String filename = files[i];
 		        if (!"searchbox.html".equals(filename)) {
-			        parseDocument(dir.getAbsolutePath() + "/" + filename, out);
+			        parseDocument(dir.getAbsolutePath() + File.separator + filename, out);
 			        addTags(filename);
 		        }
 		    }
@@ -156,7 +158,7 @@ public class Indexer {
 		FilenameFilter dirFilter = new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String name) {
-				File child = new File(dir.getAbsolutePath() + "/" + name);
+				File child = new File(dir.getAbsolutePath() + File.separator + name);
 		        return child.isDirectory();
 			}
 		};
@@ -181,7 +183,7 @@ public class Indexer {
 		out.write("var index = new LADDERS.search.index();\r\n".getBytes());
 		out.write("var titles = new LADDERS.search.document();\r\n".getBytes());
 		log.info("index.js initialized");
-		this.startDir = new File(startDir).getAbsolutePath() + "/";
+		this.startDir = new File(startDir).getAbsolutePath() + File.separator;
 		crawlFolder(startDir, out);
 	}
 
