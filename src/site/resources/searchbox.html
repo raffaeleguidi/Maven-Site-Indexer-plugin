@@ -7,10 +7,12 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
     <script>
       $(document).ready(function() {
-        $("#searchbox", window.parent.document).css('position', 'fixed');
-        $("#searchbox", window.parent.document).css('top', '10px');
-        $("#searchbox", window.parent.document).css('left', $(window).width()- 325);
-        $("#searchbox", window.parent.document).css('height', 100);
+                var searchBox = $('#searchbox', window.parent.document);
+                var refElement = $('#breadcrumbs', window.parent.document);
+                searchBox.css('position', 'fixed');
+                searchBox.css('top', '10px');
+                searchBox.css('left', refElement.position().left + 'px');
+                searchBox.css('height', 100);
       });
       
       function print(what) {
@@ -31,7 +33,7 @@
     		var q = document.getElementById('q');
     		q.value = '';
         	$("#searchOutput").css('padding', '0px');
-            $("#searchbox", window.parent.document).css('height', 100);
+        	$("#searchbox", window.parent.document).css('height', 100);
     	}
 
     	function go(q) {
@@ -48,13 +50,13 @@
     			print("</ul>");
     		}
       		$("#searchOutput").css('padding', '10px');
-            $("#searchbox", window.parent.document).css('height', 100+$("#searchOutput").height());
+        	$("#searchbox", window.parent.document).css('height', 100+$("#searchOutput").height());
     	}
 
       
     </script>
   </head>
-  <body style="font-family: Verdana, Helvetica, Arial, sans-serif; font-size: small">
+  <body style="font-family: Verdana, Helvetica, Arial, sans-serif; font-size: small; margin: 0;">
 
 	  <form action='#' onsubmit="go(document.getElementById('q').value); return false;">
 	    <input type="text" id="q" />
