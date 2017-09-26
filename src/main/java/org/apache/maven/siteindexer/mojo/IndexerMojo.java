@@ -1,5 +1,6 @@
 package org.apache.maven.siteindexer.mojo;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -24,8 +25,8 @@ public class IndexerMojo extends AbstractMojo {
 			getLog().info("------------------------------");
 			getLog().info("building index.js...");
 			indexer.buildIndex(
-					"target\\site\\", 
-					"target\\site\\js\\index.js");
+					"target"+ File.separator +"site"+ File.separator, 
+					"target" + File.separator + "site" + File.separator + "js" + File.separator + "index.js");
 			getLog().info("done.");
 		} catch (IOException e) {
 			getLog().error(e);
