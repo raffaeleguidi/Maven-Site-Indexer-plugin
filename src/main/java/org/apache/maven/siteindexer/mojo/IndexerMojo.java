@@ -1,5 +1,6 @@
 package org.apache.maven.siteindexer.mojo;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.apache.maven.plugin.AbstractMojo;
